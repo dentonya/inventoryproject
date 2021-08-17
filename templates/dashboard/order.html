@@ -1,0 +1,60 @@
+{% extends 'partials/base.html' %}
+
+{% block title %}Order Page {% endblock %}
+
+{% block content %}
+     {% include 'partials/topnav.html' %}
+    <!--Table-->
+    {% load crispy_forms_tags %}
+    <div class="container">
+        <div class="row my-4">
+           <div class="col-md-4">
+
+                <div class="card-body">
+                        <marquee behavior="" direction="down">
+                            <img src ="/media/order.jpg" class="my-4" />
+                        </marquee>
+
+
+            </div>
+        </div>
+
+            <div class="col-md-8">
+                <table class="table bg-white">
+                    <thead class="bg-info">
+                        <tr class="text-white">
+
+                            <th scope="col">Product</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Customer</th>
+                            <th scope="col">ServedBy</th>
+                            <th scope="col">Date</th>
+                             <th scope="col">Activity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for order in orders %}
+                        <tr>
+
+                            <td>{{ order.product }}</td>
+                            <td>{{ order.product.category }}</td>
+                            <td>{{ order.order_quantity }}</td>
+                            <td>{{ order.customer }}</td>
+                            <td>{{ order.staff.username }}</td>
+                            <td>{{ order.date }}</td>
+                            <td> <a class="btn btn-danger btn-sm" href="{% url 'dashboard-order-delete' order.id %}">Delete</a></td>
+                        </tr>
+
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <!--End Table-->
+{% endblock %}
