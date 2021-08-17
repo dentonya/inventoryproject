@@ -34,7 +34,7 @@
                             <td>{{ worker.email }}</td>
                             <td>{{ user.profile.phone }}</td>
                             <td><a class="btn btn-info btn-sm" href="{% url 'dashboard-staff-detail' worker.id %}">View</a>
-                             <a class="btn btn-danger btn-sm" href="{% url 'dashboard-order-delete' worker.id %}">Delete</a></td>
+                             <a class="btn btn-danger btn-sm" href="{% url 'dashboard-staff-delete' worker.id %}">Delete</a></td>
                         </tr>
                         {% endfor %}
 

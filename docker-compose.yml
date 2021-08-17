@@ -1,7 +1,26 @@
-version: '3'
+version: "2"
 services:
-   web:
-       build: .
-       command: python manage.py runserver localhost:8000
-       ports:
-           - 8000:8000
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./static:/static
+      - ./nginx:/etc/nginx/conf.d
+    depends_on:
+      - web
+  web:
+    build: .
+    container_name: dg01
+    command: bash -c "python manage.py makemigrations && python manage.py migrate && gunicorn inventoryproject.wsgi -b 0.0.0.0:8000"
+    depends_on:
+      - db
+    volumes:
+      - ./static:/static
+    expose:
+      - "8000"
+
+  db:
+    image: postgres:latest
+    container_name: postgresdb
